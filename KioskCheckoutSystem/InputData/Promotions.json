@@ -1,23 +1,24 @@
 {
   "Apple": [
     {
-      "type": "FixedPrice",
-      "description": "On Sale 1 @ 0.75",
+      "promotionType": "FixedDiscount",
+      "description": "On Sale",
+      "condition": { "Apple": 20 } ,
+      "priceDiscountInfo": 9.5
+    },    
+    {
+      "promotionType": "FixedDiscount",
+      "description": "On Sale",
       "condition": { "Apple": 1 },
       "priceDiscountInfo": 0.75
-    },
-    {
-      "type": "FixedPrice",
-      "description": "On Sale 20 @ 0.5",
-      "condition": { "Apple": 20 } ,
-      "priceDiscountInfo": 0.5
     }
+    
   ],
 
   "Orange": [
     {
-      "type": "FixedPrice",
-      "description": "On Sale 1 @ 1.5",
+      "promotionType": "FixedDiscount",
+      "description": "On Sale",
       "condition":  { "Orange": 1 },
       "priceDiscountInfo": 1.5
     }

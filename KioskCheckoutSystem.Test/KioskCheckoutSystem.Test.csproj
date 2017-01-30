@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,9 +53,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DigitalReceiptTest.cs" />
-    <Compile Include="InputTest.cs" />
+    <Compile Include="BasketTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KioskCheckoutSystem\KioskCheckoutSystem.csproj">
+      <Project>{a66bf8be-d47b-4da5-94cb-355ea8d12898}</Project>
+      <Name>KioskCheckoutSystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

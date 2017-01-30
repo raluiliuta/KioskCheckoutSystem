@@ -8,6 +8,11 @@ namespace KioskCheckoutSystem
 
         public PromotionCatalog(Dictionary<string, List<Promotion>> allPromotions)
         {
+            if(allPromotions == null)
+            {
+                throw new System.ArgumentNullException();
+            }
+
             _allPromotions = allPromotions;
         }
 

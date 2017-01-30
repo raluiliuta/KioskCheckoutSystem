@@ -4,9 +4,14 @@ using System.Configuration;
 
 namespace KioskCheckoutSystem
 {
-    class BasketProvider
+    public class BasketProvider
     {
-        private string _pathToBasket = ConfigurationManager.AppSettings["pathToBasket"];
+        private string _pathToBasket;
+
+        public BasketProvider()
+        {
+            _pathToBasket = ConfigurationManager.AppSettings["pathToBasket"];
+        }
 
         private List<string> LoadBasket()
         {

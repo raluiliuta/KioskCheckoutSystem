@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace KioskCheckoutSystem
 {
-    class Basket
+    public class Basket
     {
-        public Dictionary<string, float> BasketItems { get; set; }
+        private Dictionary<string, float> BasketItems { get; set; }
 
         public Basket(List<string> unorderedItemList)
         {

@@ -70,8 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="InputData\EmptyPromotions.json" />
     <None Include="InputData\Promotions.json" />
+    <None Include="packages.config" />
     <None Include="InputData\RegularPriceCatalog.json" />
   </ItemGroup>
   <ItemGroup>

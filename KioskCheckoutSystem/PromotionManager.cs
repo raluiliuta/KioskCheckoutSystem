@@ -31,10 +31,14 @@ namespace KioskCheckoutSystem
         {
             DateTime currentDate = DateTime.Now;
 
+            var allPromotions = _promotionCatalog.GetProductPromotions(productName);
+            
             //return only promotions that are active
-            return _promotionCatalog.GetProductPromotions(productName).Where(promo =>
-            promo.StartDate <= currentDate
-            && promo.EndDate >= currentDate).ToList();
+            return allPromotions != null ? 
+            allPromotions.Where(promo =>
+                promo.StartDate <= currentDate
+                && promo.EndDate >= currentDate).ToList()
+            :null;
         }
 
         private bool IsPromotionApplicable(Promotion promotion, Basket basket)
@@ -46,9 +50,12 @@ namespace KioskCheckoutSystem
 
         private PromotionCatalog GetPromotionCatalog()
         {
-             return new PromotionCatalog(
-                ResourceProvider.LoadJsonResource<Dictionary<string, List<Promotion>>>(
-                    ConfigurationManager.AppSettings["pathToPromotion"]));            
+            var loadedPromotions = ResourceProvider.LoadJsonResource<Dictionary<string, List<Promotion>>>(
+                    ConfigurationManager.AppSettings["pathToPromotion"]);
+
+             return loadedPromotions != null ? 
+                new PromotionCatalog(loadedPromotions) 
+                : null;            
         }
     }
 }

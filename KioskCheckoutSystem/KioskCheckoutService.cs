@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace KioskCheckoutSystem
+﻿namespace KioskCheckoutSystem
 {
-    class KioskCheckoutService
+    public class KioskCheckoutService
     {
         private Basket _basket; 
 
@@ -17,17 +15,21 @@ namespace KioskCheckoutSystem
             {
                 return ErrorMessages.OutOfOrder;
             }
-            
-            var digitalReceiptFactory = new DigitalReceiptFactory(_basket);
-            var digitalReceipt = digitalReceiptFactory.GenerateDigitalReceipt();
+            try
+            {
+                var digitalReceiptFactory = new DigitalReceiptFactory(_basket);
+                var digitalReceipt = digitalReceiptFactory.GenerateDigitalReceipt();
 
-            if (digitalReceipt == null)
+                if (digitalReceipt == null)
+                {
+                    return ErrorMessages.OutOfOrder;
+                }
+                return digitalReceipt.ToPrintableString();
+            }
+            catch
             {
                 return ErrorMessages.OutOfOrder;
-                
-            }
-            return digitalReceipt.ToPrintableString();
-        }
-        
+            }          
+        }        
     }
 }

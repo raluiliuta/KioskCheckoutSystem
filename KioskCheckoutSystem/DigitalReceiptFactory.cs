@@ -24,6 +24,11 @@ namespace KioskCheckoutSystem
         {
             var promotionList = _promotionManager.FindApplicablePromotions(productName, _basket);
 
+            if(promotionList == null)
+            {
+                return null;
+            }
+
             //select the promotion that offers the best discount
             var maxDiscount = 0m;
             Promotion promotionToApply = null;
@@ -75,6 +80,11 @@ namespace KioskCheckoutSystem
 
         public DigitalReceipt GenerateDigitalReceipt()
         {
+            if( _regularPriceCatalog == null )
+            {
+                return null;
+            }
+
             var receiptItems = _basket.GetListOfBasketItems().Select(item => CreateDigitalReceiptItem(item)).ToList();
 
             return new DigitalReceipt(

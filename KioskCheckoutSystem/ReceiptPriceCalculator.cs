@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace KioskCheckoutSystem
 {
@@ -33,8 +32,7 @@ namespace KioskCheckoutSystem
             }
 
             if (regularPrice * (decimal)discountedQuantity < discountedPrice)
-            {
-                //Console.WriteLine();//notify that there is a problem with the promotion
+            {               
                 return 0m;
             }
 

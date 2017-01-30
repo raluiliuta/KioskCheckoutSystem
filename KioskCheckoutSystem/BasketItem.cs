@@ -1,6 +1,6 @@
 ﻿namespace KioskCheckoutSystem
 {
-    class BasketItem
+    public class BasketItem
     {
         public string ProductName { get; set; }
         public float Quantity { get; set; }

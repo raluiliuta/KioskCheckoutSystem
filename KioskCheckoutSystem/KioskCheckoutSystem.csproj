@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,8 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Basket.cs" />
+    <Compile Include="BasketProvider.cs" />
+    <Compile Include="DigitalReceipt.cs" />
+    <Compile Include="DigitalReceiptItem.cs" />
+    <Compile Include="IConsolePrintable.cs" />
+    <Compile Include="KioskCheckoutService.cs" />
+    <Compile Include="PriceCatalogProvider.cs" />
+    <Compile Include="Promotion.cs" />
+    <Compile Include="PromotionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

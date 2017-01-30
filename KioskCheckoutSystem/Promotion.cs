@@ -3,13 +3,12 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace KioskCheckoutSystem
 {
     class Promotion : IConsolePrintable
     {
+        //TO DO : add start/end date
+
         [JsonProperty("promotionType", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
         public PromotionType Type { get; set; }
@@ -20,7 +19,6 @@ namespace KioskCheckoutSystem
 
         public string ToPrintableString()
         {
-
             var stringifiedConditions = "";
 
             if (Type == PromotionType.FixedDiscount)
@@ -28,6 +26,7 @@ namespace KioskCheckoutSystem
                 stringifiedConditions = string.Join(
                     " ", 
                     Condition.Select(item => string.Format("{0}", item.Value)));
+
                 stringifiedConditions = string.Format("{0} @ {1:C2}", stringifiedConditions, PriceDiscountInfo);
             }           
 

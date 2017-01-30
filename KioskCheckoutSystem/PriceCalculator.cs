@@ -1,36 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KioskCheckoutSystem
 {
     class PriceCalculator
     {
-        Basket _basket;
-        PriceCatalog _regularPriceCatalog;
-        PromotionCatalog _promotionCatalog;
+        private Basket _basket;
+        private PriceCatalog _regularPriceCatalog;
+        private PromotionCatalog _promotionCatalog;
 
         public PriceCalculator(Basket basket)
         {
             _basket = basket;
-            _regularPriceCatalog = PriceCatalogProvider.GetPriceCatalog();            
+            _regularPriceCatalog = PriceCatalogProvider.GetPriceCatalog();
             _promotionCatalog = PromotionManager.GetPromotionCatalog();
-        }        
+        }
 
         private decimal CalculateTotalPrice(List<DigitalReceiptItem> receiptItems)
         {
             var totalPrice = 0m;
-            receiptItems.ForEach(item => totalPrice += item.RegularPrice * (decimal) item.Quantity - item.Discount );
+            foreach (var item in receiptItems)
+            {
+                totalPrice += (item.RegularPrice * (decimal)item.Quantity) - item.Discount;
+            }
             return totalPrice;
         }
 
         public bool IsPromotionApplicable(Promotion promotion)
         {
-            return !promotion.Condition.Any(
-                cond => 
-                !_basket.BasketItems.ContainsKey(cond.Key) 
+            return !promotion.Condition.Any(cond =>
+                !_basket.BasketItems.ContainsKey(cond.Key)
                 || _basket.BasketItems[cond.Key] < cond.Value);
         }
 
@@ -39,7 +39,7 @@ namespace KioskCheckoutSystem
             //check if any promotions are define for an item
             var productPromotion = _promotionCatalog.GetProductPromotions(productName);
 
-            if(productPromotion == null)
+            if (productPromotion == null)
             {
                 return null;
             }
@@ -47,7 +47,7 @@ namespace KioskCheckoutSystem
             //select the promotion that offers the best discount
             var list = productPromotion.Where(promo => IsPromotionApplicable(promo)).ToList();
 
-            decimal maxDiscount = -1m;
+            var maxDiscount = 0m;
             Promotion promotionToApply = null;
 
             foreach (var promo in list)
@@ -67,9 +67,8 @@ namespace KioskCheckoutSystem
         {
             var regularPrice = _regularPriceCatalog.GetRegularPrice(productName);
 
-            
             var discountedPrice = 0m;
-            float discountedQuantity = 0;
+            var discountedQuantity = 0f;
 
             if (promotion.Type == PromotionType.FixedDiscount)
             {
@@ -79,7 +78,7 @@ namespace KioskCheckoutSystem
             else if (promotion.Type == PromotionType.PercentDiscount)
             {
                 discountedQuantity = promotion.Condition[productName];
-                discountedPrice = promotion.PriceDiscountInfo * (regularPrice * (decimal) discountedQuantity);
+                discountedPrice = promotion.PriceDiscountInfo * (regularPrice * (decimal)discountedQuantity);
             }
 
             if (regularPrice * (decimal)discountedQuantity < discountedPrice)
@@ -90,11 +89,9 @@ namespace KioskCheckoutSystem
 
             var oneApplicationDiscount = regularPrice * (decimal)discountedQuantity - discountedPrice;
 
-            var timeToApplyPromotion = Math.Floor( _basket.BasketItems[productName] / discountedQuantity);
+            var timesToApplyPromotion = Math.Floor(_basket.BasketItems[productName] / discountedQuantity);
 
-            var totalDiscount = oneApplicationDiscount * (decimal) timeToApplyPromotion;
-
-            return totalDiscount;
+            return oneApplicationDiscount * (decimal)timesToApplyPromotion;
         }
 
         private DigitalReceiptItem CreateDigitalReceiptItem(KeyValuePair<string, float> basketItem)
@@ -113,7 +110,7 @@ namespace KioskCheckoutSystem
 
             //create receipt item
             return new DigitalReceiptItem(
-                productName, 
+                productName,
                 _regularPriceCatalog.GetRegularPrice(productName),
                 promotionToApply,
                 quantityToBuy,
@@ -123,9 +120,8 @@ namespace KioskCheckoutSystem
         public DigitalReceipt GenerateDigitalReceipt()
         {
             var receiptItems = _basket.BasketItems.Select(item => CreateDigitalReceiptItem(item)).ToList();
-            
-            var digitalReceipt = new DigitalReceipt(CalculateTotalPrice(receiptItems), receiptItems);
-            return digitalReceipt;
+
+            return new DigitalReceipt(CalculateTotalPrice(receiptItems), receiptItems);
         }
     }
 }

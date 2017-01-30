@@ -11,21 +11,17 @@ namespace KioskCheckoutSystem
         {
             BasketItems = new Dictionary<string, float>();
 
-            for (var i = 0; i < unorderedItemList.Count; i++)
+            foreach (var productName in unorderedItemList)
             {
-                string poductName = unorderedItemList.ElementAt(i);
-
-                if (BasketItems.ContainsKey(poductName))
+                if (BasketItems.ContainsKey(productName))
                 {
-                    BasketItems[poductName]++;
+                    BasketItems[productName]++;
                 }
                 else
                 {
-                    BasketItems.Add(poductName, 1);
+                    BasketItems.Add(productName, 1);
                 }
             }
         }
-
-
     }
 }

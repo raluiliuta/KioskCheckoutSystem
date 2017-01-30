@@ -7,8 +7,13 @@
         public Promotion AppliedPromotion { get; set; }
         public float Quantity { get; set; }
         public decimal Discount { get; set; }
-        
-        public DigitalReceiptItem (string productName, decimal regularPrice, Promotion appliedPromotion, float quantity, decimal discount)
+
+        public DigitalReceiptItem(
+            string productName,
+            decimal regularPrice,
+            Promotion appliedPromotion,
+            float quantity,
+            decimal discount)
         {
             ProductName = productName;
             RegularPrice = regularPrice;
@@ -20,7 +25,7 @@
         public bool IsAnyPromotionApplied()
         {
             return AppliedPromotion != null;
-        } 
+        }
 
         public string ToPrintableString()
         {
@@ -29,9 +34,9 @@
                     ProductName,
                     Quantity,
                     RegularPrice,
-                    (decimal)(Quantity) * RegularPrice,
+                    (decimal)Quantity * RegularPrice,
                     IsAnyPromotionApplied() ? AppliedPromotion.ToPrintableString() : "",
-                    IsAnyPromotionApplied() ? string.Format("{0:C2}", Discount * -1) : "");            
+                    IsAnyPromotionApplied() ? string.Format("{0:C2}", Discount * -1) : "");
         }
     }
 }

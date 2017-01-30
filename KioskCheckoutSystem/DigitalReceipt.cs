@@ -6,13 +6,13 @@ namespace KioskCheckoutSystem
     class DigitalReceipt : IConsolePrintable
     {
         private decimal _totalPrice = 0m;
-        List<DigitalReceiptItem> _items;    
+        private List<DigitalReceiptItem> _items;
 
         public DigitalReceipt(decimal receiptTotalPrice, List<DigitalReceiptItem> receiptItems)
         {
             _totalPrice = receiptTotalPrice;
             _items = receiptItems;
-        }      
+        }
 
         public string ToPrintableString()
         {

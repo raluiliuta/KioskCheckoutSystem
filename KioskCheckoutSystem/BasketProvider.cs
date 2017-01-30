@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KioskCheckoutSystem
 {
     static class BasketProvider
     {
-        static public List<string> loadBasket()
+        private static List<string> LoadBasket()
         {
             try
             {
@@ -24,9 +22,9 @@ namespace KioskCheckoutSystem
             return null;
         }
 
-        static public Basket GetBasket()
+        public static Basket GetBasket()
         {
-            var list = loadBasket();
+            var list = LoadBasket();
             return new Basket(list);
         }
     }

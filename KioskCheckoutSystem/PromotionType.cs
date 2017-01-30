@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KioskCheckoutSystem
+﻿namespace KioskCheckoutSystem
 {
     /// <summary>
     /// Type of promotion
@@ -25,6 +19,6 @@ namespace KioskCheckoutSystem
         ///<remarks>
         ///Ex: Buy 1 get 1 free is actually a 50% reduction if buying 2 items
         ///</remarks> 
-        PercentDiscount       
+        PercentDiscount
     }
 }

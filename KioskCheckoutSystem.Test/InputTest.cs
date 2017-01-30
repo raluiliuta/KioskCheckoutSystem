@@ -7,8 +7,21 @@ namespace KioskCheckoutSystem.Test
     public class InputTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void InvalidPathToBasketFile()
         {
+
+        }
+
+        [TestMethod]
+        public void InvalidPathToPromotionsFile()
+        {
+
+        }
+
+        [TestMethod]
+        public void InvalidPathToPriceCatalogFile()
+        {
+
         }
     }
 }

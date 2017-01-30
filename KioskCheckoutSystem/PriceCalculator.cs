@@ -67,13 +67,19 @@ namespace KioskCheckoutSystem
         {
             var regularPrice = _regularPriceCatalog.GetRegularPrice(productName);
 
-            //TODO: add different promotion types
+            
             var discountedPrice = 0m;
             float discountedQuantity = 0;
-            if (promotion.PromotionType == PromotionType.FixedDiscount)
+
+            if (promotion.Type == PromotionType.FixedDiscount)
             {
                 discountedQuantity = promotion.Condition[productName];
                 discountedPrice = promotion.PriceDiscountInfo;
+            }
+            else if (promotion.Type == PromotionType.PercentDiscount)
+            {
+                discountedQuantity = promotion.Condition[productName];
+                discountedPrice = promotion.PriceDiscountInfo * (regularPrice * (decimal) discountedQuantity);
             }
 
             if (regularPrice * (decimal)discountedQuantity < discountedPrice)

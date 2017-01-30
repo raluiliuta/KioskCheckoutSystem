@@ -2,7 +2,12 @@
 Orange
 Orange
 Apple
+Apple
 Banana
 Orange
+Banana
+Banana
+Banana
+Banana
 Orange
 Orange

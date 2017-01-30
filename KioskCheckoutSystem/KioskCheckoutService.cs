@@ -12,6 +12,6 @@ namespace KioskCheckoutSystem
             //create the receipt
             var digitalReceipt = priceCalculator.GenerateDigitalReceipt();
             Console.Write(digitalReceipt.ToPrintableString());
-        }   
+        }  
     }
 }

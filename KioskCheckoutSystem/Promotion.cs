@@ -12,7 +12,7 @@ namespace KioskCheckoutSystem
     {
         [JsonProperty("promotionType", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public PromotionType PromotionType { get; set; }
+        public PromotionType Type { get; set; }
 
         public string Description { get; set; }
         public Dictionary<string, float> Condition { get; set; }
@@ -20,9 +20,18 @@ namespace KioskCheckoutSystem
 
         public string ToPrintableString()
         {
-            var stringifiedConditions = string.Join(" ", Condition.Select(item => string.Format("{0}", item.Value)) );
 
-            return string.Format("{0} {1} @ {2}", Description, stringifiedConditions, PriceDiscountInfo);                
+            var stringifiedConditions = "";
+
+            if (Type == PromotionType.FixedDiscount)
+            {
+                stringifiedConditions = string.Join(
+                    " ", 
+                    Condition.Select(item => string.Format("{0}", item.Value)));
+                stringifiedConditions = string.Format("{0} @ {1:C2}", stringifiedConditions, PriceDiscountInfo);
+            }           
+
+            return string.Format("{0} {1}", Description, stringifiedConditions);                
         }
     }        
 }

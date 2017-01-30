@@ -9,7 +9,7 @@
     {
       "promotionType": "FixedDiscount",
       "description": "On Sale",
-      "condition": { "Apple": 1 },
+      "condition": { "Apple": 2 },
       "priceDiscountInfo": 0.75
     }
     
@@ -19,8 +19,17 @@
     {
       "promotionType": "FixedDiscount",
       "description": "On Sale",
-      "condition":  { "Orange": 1 },
+      "condition": { "Orange": 1 },
       "priceDiscountInfo": 1.5
+    }
+  ],
+
+  "Banana": [
+    {
+      "promotionType": "PercentDiscount",
+      "description": "Buy one, get one free",
+      "condition":  { "Banana": 2 },
+      "priceDiscountInfo": 0.5
     }
   ]
 }

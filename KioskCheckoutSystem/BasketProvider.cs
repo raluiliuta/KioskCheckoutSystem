@@ -4,26 +4,26 @@ using System.Configuration;
 
 namespace KioskCheckoutSystem
 {
-    static class BasketProvider
+    class BasketProvider
     {
-        private static List<string> LoadBasket()
+        private string _pathToBasket = ConfigurationManager.AppSettings["pathToBasket"];
+
+        private List<string> LoadBasket()
         {
-            return ResourceProvider.ReadLinesFromFile(ConfigurationManager.AppSettings["pathToBasket"]);            
+            return ResourceProvider.ReadLinesFromFile(_pathToBasket);            
         }
 
-        public static Basket GetBasket()
+        public Basket GetBasket()
         {
             var list = LoadBasket();
-
-            if(list != null)
-            {
-                return new Basket(list);
-            }
-            else
-            {
-                return null;
-            }
-            
+            return list != null ? new Basket(list) : null;                        
         }
+
+        public Basket GetBasket(string pathToBasket)
+        {
+            _pathToBasket = pathToBasket;
+            return GetBasket();
+        }
+
     }
 }

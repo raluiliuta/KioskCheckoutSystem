@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KioskCheckoutSystem
 {
     class KioskCheckout
     {
-
         static void Main(string[] args)
         {
-            var basket = BasketProvider.GetBasket();
+            var basketProvider = new BasketProvider();
+
+            var basket = args.Length > 0 ?
+                basketProvider.GetBasket(args[0])
+                : basketProvider.GetBasket();
+
             var kioskCheckoutService = new KioskCheckoutService(basket);
-
-            Console.WriteLine(kioskCheckoutService.GetReceipt());            
+            Console.WriteLine(kioskCheckoutService.GetReceipt());
         }
-
     }
 }

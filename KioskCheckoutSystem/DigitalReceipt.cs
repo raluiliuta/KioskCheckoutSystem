@@ -18,7 +18,8 @@ namespace KioskCheckoutSystem
         {
             var stringifiedItems = string.Join("\n",
                 _items.Select(item => item.ToPrintableString()));
-            return string.Format("{0}\n\n \t \t Total Price: \t {1:C2}", stringifiedItems, _totalPrice);
+            
+            return string.Format("{1,33}GroceryCo \n\n{0}\n\n{1,33} Total Price: {2,20:C2}", stringifiedItems, "", _totalPrice);
         }
     }
 }

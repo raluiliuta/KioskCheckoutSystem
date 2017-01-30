@@ -30,13 +30,17 @@
         public string ToPrintableString()
         {
             return string.Format(
-                    "{0} \t {1} x \t {2:C2} \t = \t {3:C2} \n {4} \t \t {5}",
+                    "\t{0,-20}{1,10}x{2,10:C2} = {3,15:C2}{4}",
                     ProductName,
                     Quantity,
                     RegularPrice,
                     (decimal)Quantity * RegularPrice,
-                    IsAnyPromotionApplied() ? AppliedPromotion.ToPrintableString() : "",
-                    IsAnyPromotionApplied() ? string.Format("{0:C2}", Discount * -1) : "");
+                    IsAnyPromotionApplied() ? 
+                    string.Format(
+                        "\n\t {0,-43}{1,15:C2}", 
+                        AppliedPromotion.ToPrintableString(), 
+                        Discount * -1) 
+                    : "");      
         }
     }
 }

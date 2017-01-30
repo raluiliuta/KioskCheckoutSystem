@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,40 +10,19 @@ namespace KioskCheckoutSystem
 {
     class Promotion : IConsolePrintable
     {
-        public string Type { get; set; }
+        [JsonProperty("promotionType", Required = Required.Always)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public PromotionType PromotionType { get; set; }
+
         public string Description { get; set; }
         public Dictionary<string, float> Condition { get; set; }
-        public decimal PriceDiscountInfo { get; set; }
-
-        
-        public bool IsApplicable(Basket basket)
-        {
-            return !Condition.Any(cond => !basket.BasketItems.ContainsKey(cond.Key) || basket.BasketItems[cond.Key] < cond.Value);
-        }
-
-        //HAven't added the regular price as it may change and that would mean that all promotions must be modified as well
-        //private decimal regPrice;
-
-        public decimal GetPriceAfterPromotion(decimal initialPrice)
-        {
-            return PriceDiscountInfo;
-        }
-
-        public decimal GetDiscount(decimal initialPrice)
-        {
-            if (initialPrice < PriceDiscountInfo)
-            {
-                //Console.WriteLine();//notify that there is a problem with the promotion
-                return 0m;
-            }
-
-            return initialPrice - PriceDiscountInfo;
-        }
+        public decimal PriceDiscountInfo { get; set; }              
 
         public string ToPrintableString()
         {
-            return Description;                
+            var stringifiedConditions = string.Join(" ", Condition.Select(item => string.Format("{0}", item.Value)) );
+
+            return string.Format("{0} {1} @ {2}", Description, stringifiedConditions, PriceDiscountInfo);                
         }
-    }
-        
+    }        
 }

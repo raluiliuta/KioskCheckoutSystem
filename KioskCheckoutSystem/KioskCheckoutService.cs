@@ -6,12 +6,11 @@ namespace KioskCheckoutSystem
     {
         static void Main(string[] args)
         {            
-            var regPrices = PriceCatalogProvider.loadRegularPrices();
-            var promo = PromotionManager.loadPromotions();
-            var basket = BasketProvider.GetBasket();        
+            var basket = BasketProvider.GetBasket();
+            var priceCalculator = new PriceCalculator(basket);        
 
             //create the receipt
-            var digitalReceipt = new DigitalReceipt(regPrices, promo, basket.BasketItems);
+            var digitalReceipt = priceCalculator.GenerateDigitalReceipt();
             Console.Write(digitalReceipt.ToPrintableString());
         }   
     }

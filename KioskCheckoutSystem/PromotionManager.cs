@@ -11,33 +11,11 @@ namespace KioskCheckoutSystem
     {
         static private Dictionary<string, List<Promotion>> allPromotions;
 
-        public static Dictionary<string, List<Promotion>> loadPromotions()
+        public static PromotionCatalog GetPromotionCatalog()
         {
-            allPromotions = ResourceProvider.loadJsonResource<Dictionary<string, List<Promotion>>>(ConfigurationManager.AppSettings["pathToPromotion"]);
-            return allPromotions;
+             return new PromotionCatalog(
+                 ResourceProvider.loadJsonResource<Dictionary<string, List<Promotion>>>(ConfigurationManager.AppSettings["pathToPromotion"]));
+             
         }
-
-        public static Promotion GetApplicablePromotions(string productName, Basket basket)
-        {
-            if( !allPromotions.ContainsKey(productName) )
-            {
-                return null;
-            }
-
-            var promotionsToCkeck = allPromotions[productName];
-
-            var list = promotionsToCkeck.Where(promo => promo.IsApplicable(basket)).ToList();
-
-            decimal minDiscount = 0m;
-
-            for(var i = 0; i<= list.Count; i++)
-            {
-
-            }
-
-            return null;
-        }
-
-
     }
 }

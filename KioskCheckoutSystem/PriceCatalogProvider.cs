@@ -13,9 +13,10 @@ namespace KioskCheckoutSystem
     {
         //static string ;
 
-        static public Dictionary<string, decimal> loadRegularPrices()
+        static public PriceCatalog GetPriceCatalog()
         {
-            return ResourceProvider.loadJsonResource<Dictionary<string, decimal>>(ConfigurationManager.AppSettings["pathToPriceCatalog"]);
+            return new PriceCatalog(
+                ResourceProvider.loadJsonResource<Dictionary<string, decimal>>(ConfigurationManager.AppSettings["pathToPriceCatalog"]));
         }
     }
 }

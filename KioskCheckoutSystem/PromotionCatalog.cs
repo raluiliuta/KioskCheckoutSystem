@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KioskCheckoutSystem
 {
@@ -18,7 +20,12 @@ namespace KioskCheckoutSystem
                 return null;
             }
 
-            return _allPromotions[productName];
-        }        
+            DateTime currentDate = DateTime.Now;
+
+            //return only promotions that are active
+            return _allPromotions[productName].Where(promo => 
+            promo.StartDate <= currentDate 
+            && promo.EndDate >= currentDate).ToList();
+        }      
     }
 }

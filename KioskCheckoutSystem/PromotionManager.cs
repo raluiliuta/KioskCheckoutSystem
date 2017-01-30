@@ -7,9 +7,9 @@ namespace KioskCheckoutSystem
     {
         public static PromotionCatalog GetPromotionCatalog()
         {
-            return new PromotionCatalog(
-                ResourceProvider.loadJsonResource<Dictionary<string, List<Promotion>>>(ConfigurationManager.AppSettings["pathToPromotion"]));
-
+             return new PromotionCatalog(
+                ResourceProvider.loadJsonResource<Dictionary<string, List<Promotion>>>(
+                    ConfigurationManager.AppSettings["pathToPromotion"]));            
         }
     }
 }

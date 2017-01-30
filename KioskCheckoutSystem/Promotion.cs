@@ -14,6 +14,8 @@ namespace KioskCheckoutSystem
         public PromotionType Type { get; set; }
 
         public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public Dictionary<string, float> Condition { get; set; }
         public decimal PriceDiscountInfo { get; set; }              
 

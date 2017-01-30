@@ -3,12 +3,16 @@
     {
       "promotionType": "FixedDiscount",
       "description": "On Sale",
+      "startDate": "01/11/2017",
+      "endDate": "02/11/2017",
       "condition": { "Apple": 20 } ,
       "priceDiscountInfo": 9.5
     },    
     {
       "promotionType": "FixedDiscount",
       "description": "On Sale",
+      "startDate": "01/11/2017",
+      "endDate": "02/11/2017",
       "condition": { "Apple": 2 },
       "priceDiscountInfo": 0.75
     }
@@ -19,6 +23,8 @@
     {
       "promotionType": "FixedDiscount",
       "description": "On Sale",
+      "startDate": "01/11/2017",
+      "endDate": "02/11/2017",
       "condition": { "Orange": 1 },
       "priceDiscountInfo": 1.5
     }
@@ -28,6 +34,8 @@
     {
       "promotionType": "PercentDiscount",
       "description": "Buy one, get one free",
+      "startDate": "01/11/2017",
+      "endDate": "02/11/2017",
       "condition":  { "Banana": 2 },
       "priceDiscountInfo": 0.5
     }

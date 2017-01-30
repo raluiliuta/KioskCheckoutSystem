@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basket.cs" />
+    <Compile Include="BasketItem.cs" />
     <Compile Include="BasketProvider.cs" />
     <Compile Include="DigitalReceipt.cs" />
     <Compile Include="DigitalReceiptFactory.cs" />

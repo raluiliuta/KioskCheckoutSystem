@@ -23,5 +23,25 @@ namespace KioskCheckoutSystem
                 }
             }
         }
+
+        public bool IsProductInBasket(string productName)
+        {
+            return BasketItems.ContainsKey(productName);
+        }
+
+        public float GetProductQuantity(string productName)
+        {
+            if(BasketItems.ContainsKey(productName))
+            {
+                return BasketItems[productName];
+            }
+
+            return 0f;
+        }
+
+        public List<BasketItem> GetListOfBasketItems()
+        {
+            return BasketItems.Select(item => new BasketItem(item.Key, item.Value)).ToList();
+        }
     }
 }

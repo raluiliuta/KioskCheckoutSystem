@@ -13,7 +13,7 @@ namespace KioskCheckoutSystem
             _allPromotions = allPromotions;
         }
 
-        public List<Promotion> GetProductPromotions(string productName)
+        public List<Promotion> GetActiveProductPromotions(string productName)
         {
             if (!_allPromotions.ContainsKey(productName))
             {

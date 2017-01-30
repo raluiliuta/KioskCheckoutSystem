@@ -7,10 +7,10 @@ namespace KioskCheckoutSystem
         static void Main(string[] args)
         {
             var basket = BasketProvider.GetBasket();
-            var priceCalculator = new PriceCalculator(basket);
+            var digitalReceiptFactory = new DigitalReceiptFactory(basket);
 
             //create the receipt
-            var digitalReceipt = priceCalculator.GenerateDigitalReceipt();
+            var digitalReceipt = digitalReceiptFactory.GenerateDigitalReceipt();
             Console.Write(digitalReceipt.ToPrintableString());
         }
     }

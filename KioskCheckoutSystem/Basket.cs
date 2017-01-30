@@ -11,6 +11,11 @@ namespace KioskCheckoutSystem
         {
             BasketItems = new Dictionary<string, float>();
 
+            if (unorderedItemList == null)
+            {
+                return;
+            }          
+
             foreach (var productName in unorderedItemList)
             {
                 if (BasketItems.ContainsKey(productName))
@@ -31,7 +36,7 @@ namespace KioskCheckoutSystem
 
         public float GetProductQuantity(string productName)
         {
-            if(BasketItems.ContainsKey(productName))
+            if(IsProductInBasket(productName))
             {
                 return BasketItems[productName];
             }

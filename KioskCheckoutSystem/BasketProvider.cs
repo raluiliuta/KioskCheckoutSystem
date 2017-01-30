@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
+
 
 namespace KioskCheckoutSystem
 {
@@ -9,23 +8,22 @@ namespace KioskCheckoutSystem
     {
         private static List<string> LoadBasket()
         {
-            try
-            {
-                string[] lines = System.IO.File.ReadAllLines(ConfigurationManager.AppSettings["pathToBasket"]);
-                return lines.ToList();
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            return null;
+            return ResourceProvider.ReadLinesFromFile(ConfigurationManager.AppSettings["pathToBasket"]);            
         }
 
         public static Basket GetBasket()
         {
             var list = LoadBasket();
-            return new Basket(list);
+
+            if(list != null)
+            {
+                return new Basket(list);
+            }
+            else
+            {
+                return null;
+            }
+            
         }
     }
 }

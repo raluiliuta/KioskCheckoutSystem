@@ -4,14 +4,30 @@ namespace KioskCheckoutSystem
 {
     class KioskCheckoutService
     {
-        static void Main(string[] args)
-        {
-            var basket = BasketProvider.GetBasket();
-            var digitalReceiptFactory = new DigitalReceiptFactory(basket);
+        private Basket _basket; 
 
-            //create the receipt
-            var digitalReceipt = digitalReceiptFactory.GenerateDigitalReceipt();
-            Console.Write(digitalReceipt.ToPrintableString());
+        public KioskCheckoutService(Basket basket)
+        {
+            _basket = basket;
         }
+
+        public string GetReceipt()
+        {
+            if (_basket == null)
+            {
+                return ErrorMessages.OutOfOrder;
+            }
+            
+            var digitalReceiptFactory = new DigitalReceiptFactory(_basket);
+            var digitalReceipt = digitalReceiptFactory.GenerateDigitalReceipt();
+
+            if (digitalReceipt == null)
+            {
+                return ErrorMessages.OutOfOrder;
+                
+            }
+            return digitalReceipt.ToPrintableString();
+        }
+        
     }
 }

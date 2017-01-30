@@ -54,7 +54,9 @@
     <Compile Include="DigitalReceipt.cs" />
     <Compile Include="DigitalReceiptFactory.cs" />
     <Compile Include="DigitalReceiptItem.cs" />
+    <Compile Include="ErrorMessages.cs" />
     <Compile Include="IConsolePrintable.cs" />
+    <Compile Include="KioskCheckout.cs" />
     <Compile Include="KioskCheckoutService.cs" />
     <Compile Include="ReceiptPriceCalculator.cs" />
     <Compile Include="PriceCatalog.cs" />

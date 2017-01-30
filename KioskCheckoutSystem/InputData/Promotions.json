@@ -4,7 +4,7 @@
       "promotionType": "FixedDiscount",
       "description": "On Sale",
       "startDate": "01/11/2017",
-      "endDate": "02/11/2017",
+      "endDate": "01/11/2017",
       "condition": { "Apple": 20 } ,
       "priceDiscountInfo": 9.5
     },    
@@ -12,7 +12,7 @@
       "promotionType": "FixedDiscount",
       "description": "On Sale",
       "startDate": "01/11/2017",
-      "endDate": "02/11/2017",
+      "endDate": "01/11/2017",
       "condition": { "Apple": 2 },
       "priceDiscountInfo": 0.75
     }

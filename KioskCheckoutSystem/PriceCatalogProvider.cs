@@ -8,7 +8,7 @@ namespace KioskCheckoutSystem
         public static PriceCatalog GetPriceCatalog()
         {
             return new PriceCatalog(
-                ResourceProvider.loadJsonResource<Dictionary<string, decimal>>(ConfigurationManager.AppSettings["pathToPriceCatalog"]));
+                ResourceProvider.LoadJsonResource<Dictionary<string, decimal>>(ConfigurationManager.AppSettings["pathToPriceCatalog"]));
         }
     }
 }

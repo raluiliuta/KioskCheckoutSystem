@@ -1,16 +1,41 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace KioskCheckoutSystem
 {
     public static class ResourceProvider
     {
-        public static T loadJsonResource<T>(string pathToResource)
+        public static T LoadJsonResource<T>(string pathToResource)
         {
-            var json = File.ReadAllText(pathToResource);
-            var values = JsonConvert.DeserializeObject<T>(json);
+            try
+            {
+                var json = File.ReadAllText(pathToResource);
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            catch(Exception e)
+            {
+                //TODO add logFile
+                return default(T);   
+            }            
+        }
 
-            return values;
+        public static List<string> ReadLinesFromFile(string pathToFile)
+        {
+            try
+            {
+                string[] lines = System.IO.File.ReadAllLines(pathToFile);
+                return lines.ToList();
+            }
+            catch (Exception e)
+            {
+                //TODO add logFile
+                return null;
+            }
+
+            
         }
     }
 }

@@ -7,7 +7,8 @@ namespace KioskCheckoutSystem
     {
         private Basket _basket;
         private PriceCatalog _regularPriceCatalog;
-        private PromotionCatalog _promotionCatalog;
+        private PromotionManager _promotionManager;
+        
 
         private ReceiptPriceCalculator _priceCalculator;
 
@@ -15,30 +16,15 @@ namespace KioskCheckoutSystem
         {
             _basket = basket;
             _regularPriceCatalog = PriceCatalogProvider.GetPriceCatalog();
-            _promotionCatalog = PromotionManager.GetPromotionCatalog();
+            _promotionManager = new PromotionManager();
             _priceCalculator = new ReceiptPriceCalculator();
         }
 
-        private bool IsPromotionApplicable(Promotion promotion)
+        private Promotion SelectApplicablePromotion(string productName)
         {
-            return !promotion.Condition.Any(cond =>
-                !_basket.IsProductInBasket(cond.Key)
-                || _basket.GetProductQuantity(cond.Key) < cond.Value);
-        }
-
-        public Promotion FindApplicablePromotion(string productName)
-        {
-            //check if any promotions are define for an item
-            var productPromotion = _promotionCatalog.GetActiveProductPromotions(productName);
-
-            if (productPromotion == null)
-            {
-                return null;
-            }
+            var promotionList = _promotionManager.FindApplicablePromotions(productName, _basket);
 
             //select the promotion that offers the best discount
-            var promotionList = productPromotion.Where(promo => IsPromotionApplicable(promo)).ToList();
-
             var maxDiscount = 0m;
             Promotion promotionToApply = null;
 
@@ -57,7 +43,7 @@ namespace KioskCheckoutSystem
                 }
             }
 
-            return promotionToApply;          
+            return promotionToApply;
         }
 
         private DigitalReceiptItem CreateDigitalReceiptItem(BasketItem basketItem)
@@ -65,7 +51,7 @@ namespace KioskCheckoutSystem
             var productName = basketItem.ProductName;
             var quantityToBuy = basketItem.Quantity;
 
-            var promotionToApply = FindApplicablePromotion(productName);
+            var promotionToApply = SelectApplicablePromotion(productName);
 
             var discount = 0m;
 
